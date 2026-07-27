@@ -22,4 +22,4 @@ COPY --from=builder /app/dist ./dist
 # Копируем prisma (нужно для migrate deploy)
 COPY --from=builder /app/prisma ./prisma
 
-CMD ["sh", "-c", "prisma migrate deploy && node dist/main.js"]
+CMD ["sh", "-c", "npm run build && npx prisma migrate deploy && node dist/main.js"]
