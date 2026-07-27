@@ -13,13 +13,11 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package*.json ./
+COPY tsconfig.*.json ./
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 RUN npm install --omit=dev
 RUN npm install prisma
-COPY --from=builder /app/dist ./dist
 
-# Копируем prisma (нужно для migrate deploy)
-COPY --from=builder /app/prisma ./prisma
 
 CMD ["sh", "-c", "npm run build && npx prisma migrate deploy && node dist/main.js"]
