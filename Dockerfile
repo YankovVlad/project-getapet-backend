@@ -5,8 +5,5 @@ WORKDIR /app
 COPY . .
 RUN npm install
 RUN npx prisma generate
-RUN npm run build
-RUN ls -R /app/dist
 
-
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npm run build && prisma migrate deploy && node dist/main.js"]
