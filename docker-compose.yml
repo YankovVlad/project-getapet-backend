@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: pet
+      POSTGRES_PASSWORD: pet
+      POSTGRES_DB: getapet
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
